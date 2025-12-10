@@ -1,4 +1,4 @@
-# Claude Code 提示音 - 基本 (Linux)
+# Claude Code 提示音 - 基本鈴聲 (Linux)
 
 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶。
 

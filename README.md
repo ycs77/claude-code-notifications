@@ -6,7 +6,7 @@
 
 | Name | Sources |
 |------|---------|
-| 基本 | [Windows](./plugins/basic-win) \| [macOS](./plugins/basic-mac) \| [Linux](./plugins/basic-linux) |
+| 基本鈴聲 | [Windows](./plugins/basic-win) \| [macOS](./plugins/basic-mac) \| [Linux](./plugins/basic-linux) |
 
 ## 在 Claude Code 中安裝
 

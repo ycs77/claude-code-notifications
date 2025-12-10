@@ -1,7 +1,7 @@
 {
   "name": "basic-mac",
   "version": "1.0.0",
-  "description": "當 Claude Code 執行結束或停止時，自動播放提示音通知用戶 (macOS)",
+  "description": "[macOS] 基本鈴聲 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
   "author": {
     "name": "Lucas Yang",
     "email": "yangchenshin77@gmail.com"
