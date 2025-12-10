@@ -1,0 +1,9 @@
+{
+  "name": "{id}-{platform}",
+  "version": "1.0.0",
+  "description": "[{OS}] {name} - {description}",
+  "author": {
+    "name": "{authorName}",
+    "email": "{authorEmail}"
+  }
+}

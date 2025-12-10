@@ -1,0 +1,29 @@
+{
+  "description": "在 Claude Code 執行結束或停止時播放提示音",
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay \"${CLAUDE_PLUGIN_ROOT}/audios/notification.wav\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay \"${CLAUDE_PLUGIN_ROOT}/audios/stop.wav\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
