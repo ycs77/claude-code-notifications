@@ -70,7 +70,7 @@ function main() {
     mac: 'macOS',
     linux: 'Linux'
   };
-  const templateDir = 'templates';
+  const templateDir = path.resolve(__dirname, '../templates');
 
   console.log(`\n開始建立插件：${args.name} (${args.id})`);
   console.log('========================================\n');
