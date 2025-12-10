@@ -24,3 +24,5 @@ Lucas Yang (yangchenshin77@gmail.com)
 ## 授權
 
 [MIT License](LICENSE.md)
+
+本倉庫中的所有音檔均從網路上取得，版權歸原作者所有。
