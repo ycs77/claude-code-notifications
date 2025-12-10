@@ -1,4 +1,4 @@
-# Claude Code 提示音 - 基本 (macOS)
+# Claude Code 提示音 - 基本 (Linux)
 
 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶。
 
@@ -12,7 +12,7 @@
 在 Claude Code 中安裝插件：
 
 ```
-/plugin install basic-mac@ycs77-notifications
+/plugin install basic-linux@ycs77-notifications
 ```
 
 ## 使用說明
@@ -35,10 +35,14 @@
 
 1. 檢查系統音量設定
 2. 確認音效檔案存在且格式正確（.wav）
-3. 使用 `claude --debug` 檢查 hook 執行日誌
-4. 手動測試 afplay 指令：
+3. 測試 aplay 是否正常運作：
    ```bash
-   afplay /path/to/notification.wav
+   aplay /usr/share/sounds/alsa/Front_Center.wav
+   ```
+4. 使用 `claude --debug` 檢查 hook 執行日誌
+5. 手動測試音效播放：
+   ```bash
+   aplay /path/to/plugins/basic-linux/audios/notification.wav
    ```
 
 ### Hook 未觸發
@@ -48,11 +52,31 @@
 3. 使用 `/hooks` 指令檢查已載入的 hooks
 4. 使用 `claude --debug` 查看詳細日誌
 
-### afplay 找不到
+### 權限問題
 
-如果系統找不到 `afplay` 命令，這可能表示系統音效服務有問題。`afplay` 是 macOS 內建工具，通常不需要額外安裝。請確認：
-- 你正在 macOS 系統上執行
-- 系統音效服務正常運作
+如果遇到音效裝置權限問題，確認您的使用者在 `audio` 群組中：
+
+```bash
+# 檢查使用者群組
+groups
+
+# 如果不在 audio 群組，將使用者加入
+sudo usermod -a -G audio $USER
+
+# 重新登入以套用變更
+```
+
+### ALSA 配置問題
+
+如果 aplay 無法找到音效裝置：
+
+```bash
+# 列出可用的音效裝置
+aplay -l
+
+# 測試預設裝置
+aplay -D default /usr/share/sounds/alsa/Front_Center.wav
+```
 
 ## 作者
 

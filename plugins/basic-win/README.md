@@ -1,4 +1,4 @@
-# Notification (Windows)
+# Claude Code 提示音 - 基本 (Windows)
 
 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶。
 
@@ -55,13 +55,6 @@
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
-
-## 版本歷史
-
-### v1.0.0
-- 初始版本
-- 支援 Notification 和 Stop 事件
-- Windows PowerShell 音效播放
 
 ## 作者
 
