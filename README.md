@@ -2,12 +2,11 @@
 
 這裡是 Claude Code 提示音合集倉庫，會收錄各種有趣好玩的提示音插件。
 
-## Plugins
+## 插件列表
 
-| Name | Description | Contents |
-|------|-------------|----------|
-| [basic-win](./plugins/basic-win) | 聲音通知插件 (Windows) | 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶<br />**Hook:** `Notification` - 發送通知時播放音效<br />**Hook:** `Stop` - 停止執行時播放音效 |
-| [basic-mac](./plugins/basic-mac) | 聲音通知插件 (macOS) | 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶<br />**Hook:** `Notification` - 發送通知時播放音效<br />**Hook:** `Stop` - 停止執行時播放音效 |
+| Name | Sources |
+|------|---------|
+| 基本 | [Windows](./plugins/basic-win) \| [macOS](./plugins/basic-mac) |
 
 ## 在 Claude Code 中安裝
 

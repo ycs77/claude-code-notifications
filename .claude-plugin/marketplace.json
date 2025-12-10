@@ -1,5 +1,5 @@
 {
-  "name": "notifications",
+  "name": "ycs77-notifications",
   "description": "這裡是 Claude Code 提示音合集倉庫，會收錄各種有趣好玩的提示音插件",
   "owner": {
     "name": "Lucas Yang",
@@ -8,14 +8,14 @@
   "plugins": [
     {
       "name": "basic-win",
-      "description": "當 Claude Code 執行結束或停止時，自動播放提示音通知用戶 (Windows OS)",
+      "description": "[基本/Windows] 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
       "version": "1.0.0",
       "source": "./plugins/basic-win",
       "category": "development"
     },
     {
       "name": "basic-mac",
-      "description": "當 Claude Code 執行結束或停止時，自動播放提示音通知用戶 (macOS)",
+      "description": "[基本/macOS] 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
       "version": "1.0.0",
       "source": "./plugins/basic-mac",
       "category": "development"
