@@ -1,0 +1,9 @@
+{
+  "name": "basic-win",
+  "version": "1.0.0",
+  "description": "當 Claude Code 執行結束或停止時，自動播放提示音通知用戶 (Windows OS)",
+  "author": {
+    "name": "Lucas Yang",
+    "email": "yangchenshin77@gmail.com"
+  }
+}
