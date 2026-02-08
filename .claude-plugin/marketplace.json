@@ -7,21 +7,21 @@
   },
   "plugins": [
     {
-      "name": "basic-win",
+      "name": "notification-basic-win",
       "description": "[Windows] 基本鈴聲 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
       "version": "1.0.0",
       "source": "./plugins/basic-win",
       "category": "development"
     },
     {
-      "name": "basic-mac",
+      "name": "notification-basic-mac",
       "description": "[macOS] 基本鈴聲 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
       "version": "1.0.0",
       "source": "./plugins/basic-mac",
       "category": "development"
     },
     {
-      "name": "basic-linux",
+      "name": "notification-basic-linux",
       "description": "[Linux] 基本鈴聲 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
       "version": "1.0.0",
       "source": "./plugins/basic-linux",

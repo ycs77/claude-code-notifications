@@ -111,9 +111,9 @@ node scripts/create-notification-plugin.js \
    - `README.md`
 
 3. **安裝指令**（提供三個平台的安裝命令）：
-   - `/plugin install {id}-win@ycs77-notifications`
-   - `/plugin install {id}-mac@ycs77-notifications`
-   - `/plugin install {id}-linux@ycs77-notifications`
+   - `/plugin install notification-{id}-win@ycs77-notifications`
+   - `/plugin install notification-{id}-mac@ycs77-notifications`
+   - `/plugin install notification-{id}-linux@ycs77-notifications`
 
 **顯示格式範例：**
 
@@ -130,9 +130,9 @@ node scripts/create-notification-plugin.js \
   - README.md
 
 安裝指令（根據您的作業系統選擇）：
-  Windows: /plugin install {id}-win@ycs77-notifications
-  macOS:   /plugin install {id}-mac@ycs77-notifications
-  Linux:   /plugin install {id}-linux@ycs77-notifications
+  Windows: /plugin install notification-{id}-win@ycs77-notifications
+  macOS:   /plugin install notification-{id}-mac@ycs77-notifications
+  Linux:   /plugin install notification-{id}-linux@ycs77-notifications
 ```
 
 ## 重要提示

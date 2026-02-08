@@ -12,7 +12,7 @@
 在 Claude Code 中安裝插件：
 
 ```
-/plugin install basic-linux@ycs77-notifications
+/plugin install notification-basic-linux@ycs77-notifications
 ```
 
 ## 使用說明
