@@ -6,6 +6,7 @@
 
 | Name | Sources |
 |------|---------|
+| 櫻羽艾瑪 | [Windows](./plugins/sakurabaema-win) \| [macOS](./plugins/sakurabaema-mac) \| [Linux](./plugins/sakurabaema-linux) |
 | 基本鈴聲 | [Windows](./plugins/basic-win) \| [macOS](./plugins/basic-mac) \| [Linux](./plugins/basic-linux) |
 
 ## 在 Claude Code 中安裝
