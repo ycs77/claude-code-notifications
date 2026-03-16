@@ -140,14 +140,14 @@ function main() {
 
   // 移除舊的同名插件（如果存在）
   marketplace.plugins = marketplace.plugins.filter(p =>
-    !p.name.startsWith(`${args.id}-`)
+    !p.name.startsWith(`notification-${args.id}-`)
   );
 
   // 新增新插件
   for (const platform of platforms) {
     const osName = osNameMap[platform];
     marketplace.plugins.push({
-      name: `${args.id}-${platform}`,
+      name: `notification-${args.id}-${platform}`,
       description: `[${osName}] ${args.name} - ${description}`,
       version: '1.0.0',
       source: `./plugins/${args.id}-${platform}`,
@@ -201,7 +201,7 @@ function main() {
   }
   console.log('\n安裝指令：');
   for (const platform of platforms) {
-    console.log(`  /plugin install ${args.id}-${platform}@ycs77-notifications`);
+    console.log(`  /plugin install notification-${args.id}-${platform}@ycs77-notifications`);
   }
   console.log('');
 }
