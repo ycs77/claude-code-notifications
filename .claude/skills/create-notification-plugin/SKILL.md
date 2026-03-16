@@ -79,7 +79,7 @@ test -f "{stopAudioPath}" && echo "✅ Stop audio exists" || echo "❌ Stop audi
 **執行命令格式：**
 
 ```bash
-node scripts/create-notification-plugin.js \
+node "{skillBaseDir}/scripts/create-notification-plugin.js" \
   --id "{id}" \
   --name "{name}" \
   --author-name "{authorName}" \
@@ -89,8 +89,9 @@ node scripts/create-notification-plugin.js \
 ```
 
 **重要說明：**
+- `{skillBaseDir}` 請替換為本 skill 載入時顯示的 Base directory 路徑（注意：不要加 `$` 前綴，避免被 bash 當成環境變數）
 - 將所有 `{...}` 佔位符替換為步驟 1 收集到的實際值
-- 腳本路徑位於 `scripts/create-notification-plugin.js`
+- 腳本路徑位於 `{skillBaseDir}/scripts/create-notification-plugin.js`
 - 如果作者名稱或 Email 用戶選擇使用預設值，仍然要傳遞參數
 - 必須等待腳本執行完成後才能繼續下一步
 - 如果腳本執行失敗，向用戶顯示錯誤訊息並停止執行
