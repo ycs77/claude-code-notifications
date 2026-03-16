@@ -13,7 +13,7 @@
         ]
       }
     ],
-    "PostToolUse": [
+    "PreToolUse": [
       {
         "matcher": "AskUserQuestion",
         "hooks": [
