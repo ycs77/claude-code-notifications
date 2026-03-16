@@ -6,8 +6,9 @@
 
 | Name | Sources |
 |------|---------|
-| 櫻羽艾瑪 | [Windows](./plugins/sakurabaema-win) \| [macOS](./plugins/sakurabaema-mac) \| [Linux](./plugins/sakurabaema-linux) |
 | 基本鈴聲 | [Windows](./plugins/basic-win) \| [macOS](./plugins/basic-mac) \| [Linux](./plugins/basic-linux) |
+| 櫻羽艾瑪 | [Windows](./plugins/sakurabaema-win) \| [macOS](./plugins/sakurabaema-mac) \| [Linux](./plugins/sakurabaema-linux) |
+| 二階堂希羅 | [Windows](./plugins/nikaidouhiro-win) \| [macOS](./plugins/nikaidouhiro-mac) \| [Linux](./plugins/nikaidouhiro-linux) |
 
 ## 在 Claude Code 中安裝
 
