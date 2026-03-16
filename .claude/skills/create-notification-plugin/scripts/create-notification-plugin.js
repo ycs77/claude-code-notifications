@@ -171,19 +171,16 @@ function main() {
     // 找到表格結束位置
     let tableEndIndex = tableStartIndex + 2; // 跳過表頭和分隔線
     while (tableEndIndex < lines.length && lines[tableEndIndex].startsWith('|')) {
-      if (!lines[tableEndIndex].includes(`./plugins/${args.id}-`)) {
-        tableEndIndex++;
-      } else {
-        // 移除這一行
+      if (lines[tableEndIndex].includes(`./plugins/${args.id}-`)) {
         lines.splice(tableEndIndex, 1);
-        tableEndIndex--; // 調整索引
+      } else {
         tableEndIndex++;
       }
     }
 
-    // 在分隔線後插入新行
+    // 在表格最後一行後插入新行
     const newLine = `| ${args.name} | [Windows](./plugins/${args.id}-win) \\| [macOS](./plugins/${args.id}-mac) \\| [Linux](./plugins/${args.id}-linux) |`;
-    lines.splice(tableStartIndex + 2, 0, newLine);
+    lines.splice(tableEndIndex, 0, newLine);
 
     readme = lines.join('\n');
     fs.writeFileSync(readmePath, readme);
