@@ -3,7 +3,19 @@
   "hooks": {
     "Notification": [
       {
-        "matcher": "*",
+        "matcher": "permission_prompt|elicitation_dialog",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "aplay \"${CLAUDE_PLUGIN_ROOT}/audios/notification.wav\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "AskUserQuestion",
         "hooks": [
           {
             "type": "command",

@@ -3,7 +3,19 @@
   "hooks": {
     "Notification": [
       {
-        "matcher": "*",
+        "matcher": "permission_prompt|elicitation_dialog",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -Command \"(New-Object System.Media.SoundPlayer (('${CLAUDE_PLUGIN_ROOT}/audios/notification.wav' -replace '^/([a-zA-Z])/', '\\$1:\\') -replace '/', '\\')).PlaySync()\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "AskUserQuestion",
         "hooks": [
           {
             "type": "command",
