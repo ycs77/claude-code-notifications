@@ -9,63 +9,63 @@
     {
       "name": "notification-basic-win",
       "description": "[Windows] 基本鈴聲 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "source": "./plugins/basic-win",
       "category": "development"
     },
     {
       "name": "notification-basic-mac",
       "description": "[macOS] 基本鈴聲 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "source": "./plugins/basic-mac",
       "category": "development"
     },
     {
       "name": "notification-basic-linux",
       "description": "[Linux] 基本鈴聲 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.1",
+      "version": "2.0.0",
       "source": "./plugins/basic-linux",
       "category": "development"
     },
     {
       "name": "notification-sakurabaema-win",
       "description": "[Windows] 櫻羽艾瑪 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "source": "./plugins/sakurabaema-win",
       "category": "development"
     },
     {
       "name": "notification-sakurabaema-mac",
       "description": "[macOS] 櫻羽艾瑪 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "source": "./plugins/sakurabaema-mac",
       "category": "development"
     },
     {
       "name": "notification-sakurabaema-linux",
       "description": "[Linux] 櫻羽艾瑪 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "source": "./plugins/sakurabaema-linux",
       "category": "development"
     },
     {
       "name": "notification-nikaidouhiro-win",
       "description": "[Windows] 二階堂希羅 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "source": "./plugins/nikaidouhiro-win",
       "category": "development"
     },
     {
       "name": "notification-nikaidouhiro-mac",
       "description": "[macOS] 二階堂希羅 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "source": "./plugins/nikaidouhiro-mac",
       "category": "development"
     },
     {
       "name": "notification-nikaidouhiro-linux",
       "description": "[Linux] 二階堂希羅 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "source": "./plugins/nikaidouhiro-linux",
       "category": "development"
     }
