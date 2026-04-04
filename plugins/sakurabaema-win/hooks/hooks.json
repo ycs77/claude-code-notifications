@@ -1,5 +1,5 @@
 {
-  "description": "在 Claude Code 執行結束或停止時播放提示音",
+  "description": "在 Claude Code 需要互動、提問或停止時自動播放提示音",
   "hooks": {
     "Notification": [
       {

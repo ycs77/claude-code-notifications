@@ -47,7 +47,7 @@ function main() {
   }
 
   // 固定的描述文字
-  const description = '當 Claude Code 執行結束或停止時，自動播放提示音通知用戶';
+  const description = '在 Claude Code 需要互動、提問或停止時，自動播放提示音通知用戶';
 
   // 設定預設值
   const authorName = args.authorName || 'Lucas Yang';

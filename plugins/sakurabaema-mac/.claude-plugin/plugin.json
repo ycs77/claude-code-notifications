@@ -1,7 +1,7 @@
 {
   "name": "notification-sakurabaema-mac",
   "version": "2.0.0",
-  "description": "[macOS] 櫻羽艾瑪 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
+  "description": "[macOS] 櫻羽艾瑪 - 在 Claude Code 需要互動、提問或停止時，自動播放提示音通知用戶",
   "author": {
     "name": "Lucas Yang",
     "email": "yangchenshin77@gmail.com"
