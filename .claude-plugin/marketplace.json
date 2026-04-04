@@ -28,6 +28,13 @@
       "category": "development"
     },
     {
+      "name": "notification-basic-wsl",
+      "description": "[WSL] 基本鈴聲 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
+      "version": "2.0.0",
+      "source": "./plugins/basic-wsl",
+      "category": "development"
+    },
+    {
       "name": "notification-sakurabaema-win",
       "description": "[Windows] 櫻羽艾瑪 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
       "version": "2.0.0",
@@ -49,6 +56,13 @@
       "category": "development"
     },
     {
+      "name": "notification-sakurabaema-wsl",
+      "description": "[WSL] 櫻羽艾瑪 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
+      "version": "2.0.0",
+      "source": "./plugins/sakurabaema-wsl",
+      "category": "development"
+    },
+    {
       "name": "notification-nikaidouhiro-win",
       "description": "[Windows] 二階堂希羅 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
       "version": "2.0.0",
@@ -67,6 +81,13 @@
       "description": "[Linux] 二階堂希羅 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
       "version": "2.0.0",
       "source": "./plugins/nikaidouhiro-linux",
+      "category": "development"
+    },
+    {
+      "name": "notification-nikaidouhiro-wsl",
+      "description": "[WSL] 二階堂希羅 - 當 Claude Code 執行結束或停止時，自動播放提示音通知用戶",
+      "version": "2.0.0",
+      "source": "./plugins/nikaidouhiro-wsl",
       "category": "development"
     }
   ]

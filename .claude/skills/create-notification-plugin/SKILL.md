@@ -8,7 +8,7 @@ allowed-tools: AskUserQuestion, Bash
 
 ## 簡介
 
-這個 skill 會引導您建立包含三個作業系統版本的通知插件（Windows、macOS、Linux）。
+這個 skill 會引導您建立包含四個版本的通知插件（Windows、macOS、Linux、WSL）。
 
 **重要：你必須嚴格按照以下步驟順序執行，不可跳過任何步驟。**
 
@@ -102,19 +102,21 @@ node "{skillBaseDir}/scripts/create-notification-plugin.js" \
 
 腳本執行成功後，你必須向用戶清楚地顯示：
 
-1. **已建立的插件目錄**（通常會有三個）：
+1. **已建立的插件目錄**（通常會有四個）：
    - `plugins/{id}-win`
    - `plugins/{id}-mac`
    - `plugins/{id}-linux`
+   - `plugins/{id}-wsl`
 
 2. **已更新的檔案**：
    - `.claude-plugin/marketplace.json`
    - `README.md`
 
-3. **安裝指令**（提供三個平台的安裝命令）：
+3. **安裝指令**（提供四個平台的安裝命令）：
    - `/plugin install notification-{id}-win@ycs77-notifications`
    - `/plugin install notification-{id}-mac@ycs77-notifications`
    - `/plugin install notification-{id}-linux@ycs77-notifications`
+   - `/plugin install notification-{id}-wsl@ycs77-notifications`
 
 **顯示格式範例：**
 
@@ -125,6 +127,7 @@ node "{skillBaseDir}/scripts/create-notification-plugin.js" \
   - plugins/{id}-win
   - plugins/{id}-mac
   - plugins/{id}-linux
+  - plugins/{id}-wsl
 
 已更新的檔案：
   - .claude-plugin/marketplace.json
@@ -134,6 +137,7 @@ node "{skillBaseDir}/scripts/create-notification-plugin.js" \
   Windows: /plugin install notification-{id}-win@ycs77-notifications
   macOS:   /plugin install notification-{id}-mac@ycs77-notifications
   Linux:   /plugin install notification-{id}-linux@ycs77-notifications
+  WSL:     /plugin install notification-{id}-wsl@ycs77-notifications
 ```
 
 ## 重要提示

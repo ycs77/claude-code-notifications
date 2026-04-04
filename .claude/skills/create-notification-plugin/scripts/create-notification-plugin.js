@@ -64,11 +64,12 @@ function main() {
   }
 
   // 定義平台
-  const platforms = ['win', 'mac', 'linux'];
+  const platforms = ['win', 'mac', 'linux', 'wsl'];
   const osNameMap = {
     win: 'Windows',
     mac: 'macOS',
-    linux: 'Linux'
+    linux: 'Linux',
+    wsl: 'WSL'
   };
   const templateDir = path.resolve(__dirname, '../templates');
 
@@ -179,7 +180,7 @@ function main() {
     }
 
     // 在表格最後一行後插入新行
-    const newLine = `| ${args.name} | [Windows](./plugins/${args.id}-win) \\| [macOS](./plugins/${args.id}-mac) \\| [Linux](./plugins/${args.id}-linux) |`;
+    const newLine = `| ${args.name} | [Windows](./plugins/${args.id}-win) \\| [macOS](./plugins/${args.id}-mac) \\| [Linux](./plugins/${args.id}-linux) \\| [WSL](./plugins/${args.id}-wsl) |`;
     lines.splice(tableEndIndex, 0, newLine);
 
     readme = lines.join('\n');
