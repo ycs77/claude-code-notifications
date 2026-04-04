@@ -29,33 +29,6 @@
 - 當 Claude Code 主代理準備停止執行時觸發
 - 用於通知用戶任務已完成
 
-## 疑難排解
-
-### 沒有聲音
-
-1. 檢查系統音量設定
-2. 確認音效檔案存在且格式正確（.wav）
-3. 使用 `claude --debug` 檢查 hook 執行日誌
-4. 手動測試 PowerShell 指令：
-   ```powershell
-   (New-Object System.Media.SoundPlayer 'D:\path\to\notification.wav').PlaySync()
-   ```
-
-### Hook 未觸發
-
-1. 確認插件已正確安裝
-2. 重新啟動 Claude Code（hooks 在啟動時載入）
-3. 使用 `/hooks` 指令檢查已載入的 hooks
-4. 使用 `claude --debug` 查看詳細日誌
-
-### 權限問題
-
-如果 PowerShell 執行被阻擋，可能需要調整執行策略：
-
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
 ## 作者
 
 {authorName} ({authorEmail})
