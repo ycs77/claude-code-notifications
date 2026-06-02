@@ -1,153 +1,84 @@
 ---
 name: create-notification-plugin
 description: 互動式建立多平台通知插件的完整流程
-allowed-tools: AskUserQuestion, Bash
+allowed-tools: Bash, Read, Edit
 ---
 
 # 建立通知插件流程
 
-## 簡介
+本 skill 維護專案根目錄的 `notifications.json` 註冊表，並觸發 `build.js` 全量重生所有 `plugins/`、`.claude-plugin/marketplace.json` 與根 `README.md` 的插件清單表格。
 
-這個 skill 會引導您建立包含四個版本的通知插件（Windows、macOS、Linux、WSL）。
+## 步驟 1：收集插件資訊
 
-**重要：你必須嚴格按照以下步驟順序執行，不可跳過任何步驟。**
+需要從使用者取得：
 
-## 執行步驟
+- **插件 ID**：kebab-case 英文，例如 `basic`、`my-sound`
+- **插件名稱**：顯示用名稱（中文 OK），例如「基本鈴聲」
+- **是否要為此插件指定獨立 author**：
+  - 若是 → 取得 author name 與 email
+  - 若否 → 自動沿用 `templates/marketplace.json.tmpl` 的 `owner`（市集預設作者）
 
-### 1. 收集插件資訊
+收集方式由你自行判斷（自然對話、批次提問、或必要時用合適的提問工具皆可），重點是訊息完整、不重複打擾使用者。
 
-**第一步：你必須立即使用 AskUserQuestion tool 一次性收集所有必要資訊。**
+## 步驟 2：預檢音檔
 
-使用以下格式向用戶詢問：
+驗證以下兩個音檔是否已就位：
 
-**必須詢問的問題清單：**
+- `templates/audios/{id}/notification.wav`
+- `templates/audios/{id}/stop.wav`
 
-1. **插件 ID**（問題：「請輸入插件 ID（英文識別名稱，例如：mario、my-sound）」）
-   - header: "插件 ID"
-   - 提供選項建議，但允許用戶自訂
+任一不存在 → 明確告知使用者放置位置（`templates/audios/{id}/`），請使用者先放好音檔再繼續，**不可進入後續步驟**。
 
-2. **插件名稱**（問題：「請輸入插件顯示名稱（例如：瑪利歐音效、我的音效）」）
-   - header: "插件名稱"
-   - 提供選項建議，但允許用戶自訂
+## 步驟 3：更新註冊表
 
-3. **作者名稱**（問題：「請輸入作者名稱」）
-   - header: "作者名稱"
-   - 提供選項：預設值 "Lucas Yang" 或自訂
+1. Read `notifications.json`
+2. 用 Edit 工具在 `plugins` 陣列末端插入新 entry：
 
-4. **作者 Email**（問題：「請輸入作者 Email」）
-   - header: "作者 Email"
-   - 提供選項：預設值 "yangchenshin77@gmail.com" 或自訂
+```json
+{
+  "id": "{id}",
+  "name": "{name}",
+  "platforms": ["Windows", "macOS", "Linux", "WSL"]
+}
+```
 
-5. **notification.wav 音檔路徑**（問題：「請輸入 notification.wav 音檔的完整路徑」）
-   - header: "通知音檔"
-   - 說明：當 Claude Code 執行結束時播放
-   - 提供常見路徑建議或自訂
+若使用者選擇自訂 author，加上 `author` 欄：
 
-6. **stop.wav 音檔路徑**（問題：「請輸入 stop.wav 音檔的完整路徑」）
-   - header: "停止音檔"
-   - 說明：當 Claude Code 被停止時播放
-   - 提供常見路徑建議或自訂
+```json
+{
+  "id": "{id}",
+  "name": "{name}",
+  "platforms": ["Windows", "macOS", "Linux", "WSL"],
+  "author": {
+    "name": "{authorName}",
+    "email": "{authorEmail}"
+  }
+}
+```
 
-**注意：**
-- 插件描述已固定為「在 Claude Code 需要互動、提問或停止時，自動播放提示音通知用戶」
-- 你必須等待用戶回答所有問題後才能繼續下一步
+若同 `id` 已存在於 `plugins` 陣列：回報「該 id 已存在，build 會冪等覆蓋」，**不修改現有 entry**，直接進步驟 4。
 
-### 2. 驗證音檔路徑
-
-**第二步：你必須使用 Bash tool 驗證用戶提供的音檔路徑是否存在。**
-
-執行以下命令（將 `{notificationAudioPath}` 和 `{stopAudioPath}` 替換為用戶提供的實際路徑）：
+## 步驟 4：執行建置
 
 ```bash
-test -f "{notificationAudioPath}" && echo "✅ Notification audio exists" || echo "❌ Notification audio NOT found"
-test -f "{stopAudioPath}" && echo "✅ Stop audio exists" || echo "❌ Stop audio NOT found"
+node build.js
 ```
 
-**重要檢查點：**
-- 如果**任何一個**音檔不存在，你必須：
-  1. 停止執行
-  2. 向用戶顯示錯誤訊息，明確指出哪個音檔不存在
-  3. 請用戶檢查路徑並重新執行 skill
-  4. **不可繼續執行後續步驟**
+build.js 會：
 
-- 只有**兩個音檔都存在**時，才能繼續下一步
+- 全量重生 `plugins/{id}-{win,mac,linux,wsl}/`
+- 重寫 `.claude-plugin/marketplace.json`
+- 替換根 `README.md` 中 `<!-- plugins:start -->` 與 `<!-- plugins:end -->` 之間的表格
 
-### 3. 執行 Node.js 腳本建立插件
+若 build 失敗，向使用者顯示錯誤訊息並停止。
 
-**第三步：你必須使用 Bash tool 執行 Node.js 腳本來建立插件。**
+## 步驟 5：顯示結果
 
-**執行命令格式：**
+解析 build.js stdout，整理回報：
 
-```bash
-node "{skillBaseDir}/scripts/create-notification-plugin.js" \
-  --id "{id}" \
-  --name "{name}" \
-  --author-name "{authorName}" \
-  --author-email "{authorEmail}" \
-  --notification-audio "{notificationAudioPath}" \
-  --stop-audio "{stopAudioPath}"
-```
-
-**重要說明：**
-- `{skillBaseDir}` 請替換為本 skill 載入時顯示的 Base directory 路徑（注意：不要加 `$` 前綴，避免被 bash 當成環境變數）
-- 將所有 `{...}` 佔位符替換為步驟 1 收集到的實際值
-- 腳本路徑位於 `{skillBaseDir}/scripts/create-notification-plugin.js`
-- 如果作者名稱或 Email 用戶選擇使用預設值，仍然要傳遞參數
-- 必須等待腳本執行完成後才能繼續下一步
-- 如果腳本執行失敗，向用戶顯示錯誤訊息並停止執行
-
-### 4. 顯示建立結果
-
-**第四步：解析腳本輸出並向用戶顯示完整的建立結果。**
-
-腳本執行成功後，你必須向用戶清楚地顯示：
-
-1. **已建立的插件目錄**（通常會有四個）：
-   - `plugins/{id}-win`
-   - `plugins/{id}-mac`
-   - `plugins/{id}-linux`
-   - `plugins/{id}-wsl`
-
-2. **已更新的檔案**：
-   - `.claude-plugin/marketplace.json`
-   - `README.md`
-
-3. **安裝指令**（提供四個平台的安裝命令）：
-   - `/plugin install notification-{id}-win@ycs77-notifications`
-   - `/plugin install notification-{id}-mac@ycs77-notifications`
-   - `/plugin install notification-{id}-linux@ycs77-notifications`
-   - `/plugin install notification-{id}-wsl@ycs77-notifications`
-
-**顯示格式範例：**
-
-```
-✅ 插件建立成功！
-
-已建立的插件：
-  - plugins/{id}-win
-  - plugins/{id}-mac
-  - plugins/{id}-linux
-  - plugins/{id}-wsl
-
-已更新的檔案：
-  - .claude-plugin/marketplace.json
-  - README.md
-
-安裝指令（根據您的作業系統選擇）：
-  Windows: /plugin install notification-{id}-win@ycs77-notifications
-  macOS:   /plugin install notification-{id}-mac@ycs77-notifications
-  Linux:   /plugin install notification-{id}-linux@ycs77-notifications
-  WSL:     /plugin install notification-{id}-wsl@ycs77-notifications
-```
-
-## 重要提示
-
-**執行限制：**
-- 插件 ID 應使用小寫字母和連字符，例如 `my-sound`
-- 音檔必須是 WAV 格式
-- 腳本會自動更新 `.claude-plugin/marketplace.json` 和 `README.md`
-- 如果插件目錄已存在，腳本會自動覆蓋（有警告訊息）
-
-**故障排除：**
-- 如果步驟 3 沒有執行，請確認音檔驗證通過
-- 如果腳本執行失敗，檢查錯誤訊息並向用戶說明問題
+- 建立的插件目錄清單
+- 對應平台的安裝指令，例如：
+  - `/plugin install notification-{id}-win@ycs77-notifications`
+  - `/plugin install notification-{id}-mac@ycs77-notifications`
+  - `/plugin install notification-{id}-linux@ycs77-notifications`
+  - `/plugin install notification-{id}-wsl@ycs77-notifications`

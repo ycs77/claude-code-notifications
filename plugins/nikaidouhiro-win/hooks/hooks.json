@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -Command \"(New-Object System.Media.SoundPlayer (('${CLAUDE_PLUGIN_ROOT}/audios/notification.wav' -replace '^/([a-zA-Z])/', '\\$1:\\') -replace '/', '\\')).PlaySync()\"",
+            "command": "powershell.exe -NoProfile -Command \"[System.Media.SoundPlayer]::new((Resolve-Path -LiteralPath ('${CLAUDE_PLUGIN_ROOT}/audios/notification.wav' -replace '^/([a-zA-Z])/', '\\$1:/')).ProviderPath).PlaySync()\"",
             "timeout": 5
           }
         ]
@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -Command \"(New-Object System.Media.SoundPlayer (('${CLAUDE_PLUGIN_ROOT}/audios/notification.wav' -replace '^/([a-zA-Z])/', '\\$1:\\') -replace '/', '\\')).PlaySync()\"",
+            "command": "powershell.exe -NoProfile -Command \"[System.Media.SoundPlayer]::new((Resolve-Path -LiteralPath ('${CLAUDE_PLUGIN_ROOT}/audios/notification.wav' -replace '^/([a-zA-Z])/', '\\$1:/')).ProviderPath).PlaySync()\"",
             "timeout": 5
           }
         ]
@@ -31,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -Command \"(New-Object System.Media.SoundPlayer (('${CLAUDE_PLUGIN_ROOT}/audios/stop.wav' -replace '^/([a-zA-Z])/', '\\$1:\\') -replace '/', '\\')).PlaySync()\"",
+            "command": "powershell.exe -NoProfile -Command \"[System.Media.SoundPlayer]::new((Resolve-Path -LiteralPath ('${CLAUDE_PLUGIN_ROOT}/audios/stop.wav' -replace '^/([a-zA-Z])/', '\\$1:/')).ProviderPath).PlaySync()\"",
             "timeout": 5
           }
         ]

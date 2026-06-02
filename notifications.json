@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "plugins": [
+    {
+      "id": "basic",
+      "name": "基本鈴聲",
+      "platforms": ["Windows", "macOS", "Linux", "WSL"]
+    },
+    {
+      "id": "sakurabaema",
+      "name": "櫻羽艾瑪",
+      "platforms": ["Windows", "macOS", "Linux", "WSL"]
+    },
+    {
+      "id": "nikaidouhiro",
+      "name": "二階堂希羅",
+      "platforms": ["Windows", "macOS", "Linux", "WSL"]
+    }
+  ],
+  "wsl": {
+    "prerequisites": "在 WSL 中使用此插件前，請先安裝 PulseAudio 工具：\n\n```bash\nsudo apt install pulseaudio-utils\n```\n"
+  }
+}
