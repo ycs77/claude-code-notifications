@@ -58,7 +58,6 @@ function buildHooks(meta) {
     ],
   })
   return {
-    description: '在 Claude Code 需要互動、提問或停止時自動播放提示音',
     hooks: {
       Notification: [mkHook('notification.wav', 'permission_prompt|elicitation_dialog')],
       PreToolUse: [mkHook('notification.wav', 'AskUserQuestion')],
