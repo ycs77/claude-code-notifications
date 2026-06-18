@@ -12,6 +12,7 @@
 在 Claude Code 中安裝插件：
 
 ```
+/plugin marketplace add ycs77/claude-code-notifications
 /plugin install notification-nikaidouhiro-mac@ycs77-notifications
 ```
 
@@ -22,10 +23,12 @@
 ## Hook 觸發時機
 
 ### Notification Hook
+
 - 當 Claude Code 發送用戶通知時觸發
 - 用於提醒用戶注意重要訊息
 
 ### Stop Hook
+
 - 當 Claude Code 主代理準備停止執行時觸發
 - 用於通知用戶任務已完成
 
