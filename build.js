@@ -66,25 +66,29 @@ function buildHooks(meta) {
   }
 }
 
-function updateReadmeBlock(file, tableText) {
+function updateReadmePlugins(file, tableText) {
   let txt = fs.readFileSync(file, 'utf8')
-  const re = /(<!-- plugins:start -->)[\s\S]*?(<!-- plugins:end -->)/
-  if (!re.test(txt)) {
+  const markerRe = /(<!-- plugins:start -->)[\s\S]*?(<!-- plugins:end -->)/
+  if (!markerRe.test(txt)) {
     throw new Error(`README.md 缺少 <!-- plugins:start --> / <!-- plugins:end --> 標記，請先手動補上`)
   }
-  const next = txt.replace(re, `$1\n${tableText}\n$2`)
-  fs.writeFileSync(file, next)
+  fs.writeFileSync(file, txt.replace(markerRe, `$1\n${tableText}\n$2`))
 }
 
 function main() {
   const reg = JSON.parse(fs.readFileSync(REG_PATH, 'utf8'))
-  const marketplaceTpl = JSON.parse(fs.readFileSync(path.join(TPL_DIR, 'marketplace.json.tmpl'), 'utf8'))
+  const marketplaceTpl = fs.readFileSync(path.join(TPL_DIR, 'marketplace.json.tmpl'), 'utf8')
   const pluginJsonTpl = fs.readFileSync(path.join(TPL_DIR, 'plugin.json.tmpl'), 'utf8')
   const readmeTpl = fs.readFileSync(path.join(TPL_DIR, 'README.md.tmpl'), 'utf8')
 
-  const defaultAuthor = marketplaceTpl.owner
+  const defaultAuthor = reg.owner
   const version = reg.version || '1.0.0'
   const wslPrereq = (reg.wsl && reg.wsl.prerequisites) || ''
+
+  // 預檢：owner 信息完整
+  if (!defaultAuthor || !defaultAuthor.name || !defaultAuthor.email) {
+    throw new Error('notifications.json 缺少 owner.name 或 owner.email')
+  }
 
   // 預檢：音檔存在 + 平台合法
   const errors = []
@@ -125,7 +129,7 @@ function main() {
       if (!codePattern.test(entry)) continue
       if (expected.has(entry)) continue
       fs.rmSync(full, { recursive: true, force: true })
-      console.log(`🗑  清理：plugins/${entry}`)
+      console.log(`❎ 清理：plugins/${entry}`)
     }
   }
 
@@ -135,7 +139,8 @@ function main() {
     const author = p.author || defaultAuthor
     for (const plat of p.platforms) {
       const meta = PLATFORM_META[plat]
-      const dir = path.join(PLUGINS_DIR, `${p.id}-${meta.code}`)
+      const dirName = `${p.id}-${meta.code}`
+      const dir = path.join(PLUGINS_DIR, dirName)
 
       // 重建目錄（冪等）
       fs.rmSync(dir, { recursive: true, force: true })
@@ -143,17 +148,20 @@ function main() {
       fs.mkdirSync(path.join(dir, 'hooks'), { recursive: true })
       fs.mkdirSync(path.join(dir, 'audios'), { recursive: true })
 
-      // plugin.json
-      const pluginJsonStr = render(pluginJsonTpl, {
+      // 變數表
+      const pluginVars = {
         id: p.id,
-        platform_code: meta.code,
+        platformCode: meta.code,
         version,
         osName: meta.osName,
         name: p.name,
         description: DESCRIPTION,
         authorName: author.name,
         authorEmail: author.email,
-      })
+      }
+
+      // plugin.json
+      const pluginJsonStr = render(pluginJsonTpl, pluginVars)
       writeJson(path.join(dir, '.claude-plugin', 'plugin.json'), JSON.parse(pluginJsonStr))
 
       // hooks.json
@@ -166,36 +174,30 @@ function main() {
 
       // README.md
       const prerequisitesBlock =
-        plat === 'WSL' && wslPrereq ? `## 前置需求\n\n${wslPrereq}\n` : ''
-      const readme = render(readmeTpl, {
-        id: p.id,
-        platform_code: meta.code,
-        osName: meta.osName,
-        name: p.name,
-        description: DESCRIPTION,
-        authorName: author.name,
-        authorEmail: author.email,
-        prerequisitesBlock,
-      })
+        plat === 'WSL' && wslPrereq ? `## 前置需求\n\n${wslPrereq.trim()}\n\n` : ''
+      const readme = render(readmeTpl, { ...pluginVars, prerequisitesBlock })
       fs.writeFileSync(path.join(dir, 'README.md'), readme)
 
       marketplaceEntries.push({
-        name: `notification-${p.id}-${meta.code}`,
+        name: `notification-${dirName}`,
         description: `[${meta.osName}] ${p.name} - ${DESCRIPTION}`,
         version,
-        source: `./plugins/${p.id}-${meta.code}`,
+        source: `./plugins/${dirName}`,
         category: 'development',
       })
-      console.log(`✅ plugins/${p.id}-${meta.code}`)
+      console.log(`✅ plugins/${dirName}`)
     }
   }
 
   // 重生 marketplace.json
-  const marketplaceOut = { ...marketplaceTpl, plugins: marketplaceEntries }
-  writeJson(MARKETPLACE_PATH, marketplaceOut)
+  const marketplaceRendered = JSON.parse(render(marketplaceTpl, {
+    ownerName: defaultAuthor.name,
+    ownerEmail: defaultAuthor.email,
+  }))
+  writeJson(MARKETPLACE_PATH, { ...marketplaceRendered, plugins: marketplaceEntries })
   console.log('✅ .claude-plugin/marketplace.json')
 
-  // 更新根 README.md
+  // 更新 root README.md
   const rows = reg.plugins
     .map((p) => {
       const cells = p.platforms
@@ -208,7 +210,7 @@ function main() {
     })
     .join('\n')
   const tableText = `| Name | Sources |\n|------|---------|\n${rows}`
-  updateReadmeBlock(ROOT_README, tableText)
+  updateReadmePlugins(ROOT_README, tableText)
   console.log('✅ README.md')
 
   console.log(`\n🎉 完成：${marketplaceEntries.length} 個插件建立完畢`)
