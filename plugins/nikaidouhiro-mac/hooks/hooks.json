@@ -1,8 +1,8 @@
 {
   "hooks": {
-    "Notification": [
+    "PermissionRequest": [
       {
-        "matcher": "permission_prompt|elicitation_dialog",
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",
@@ -12,9 +12,9 @@
         ]
       }
     ],
-    "PreToolUse": [
+    "Elicitation": [
       {
-        "matcher": "AskUserQuestion",
+        "matcher": "*",
         "hooks": [
           {
             "type": "command",

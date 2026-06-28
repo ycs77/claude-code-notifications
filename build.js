@@ -59,8 +59,8 @@ function buildHooks(meta) {
   })
   return {
     hooks: {
-      Notification: [mkHook('notification.wav', 'permission_prompt|elicitation_dialog')],
-      PreToolUse: [mkHook('notification.wav', 'AskUserQuestion')],
+      PermissionRequest: [mkHook('notification.wav', '*')],
+      Elicitation: [mkHook('notification.wav', '*')],
       Stop: [mkHook('stop.wav', '*')],
     },
   }
