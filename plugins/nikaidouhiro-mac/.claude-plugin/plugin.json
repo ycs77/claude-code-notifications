@@ -1,7 +1,7 @@
 {
   "name": "notification-nikaidouhiro-mac",
   "version": "2.1.0",
-  "description": "[macOS] 二階堂希羅 - 在 Claude Code 需要互動、提問或停止時，自動播放提示音通知用戶",
+  "description": "[macOS] 二階堂希羅 - 在 Claude Code 要求權限、提問或停止時，自動播放提示音通知用戶",
   "author": {
     "name": "Lucas Yang",
     "email": "yangchenshin77@gmail.com"

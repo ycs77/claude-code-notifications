@@ -9,7 +9,7 @@ const PLUGINS_DIR = path.join(ROOT, 'plugins')
 const MARKETPLACE_PATH = path.join(ROOT, '.claude-plugin', 'marketplace.json')
 const ROOT_README = path.join(ROOT, 'README.md')
 
-const DESCRIPTION = '在 Claude Code 需要互動、提問或停止時，自動播放提示音通知用戶'
+const DESCRIPTION = '在 Claude Code 要求權限、提問或停止時，自動播放提示音通知用戶'
 
 const PLATFORM_META = {
   Windows: {
